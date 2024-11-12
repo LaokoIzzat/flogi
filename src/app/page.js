@@ -34,19 +34,19 @@ export default function Home() {
         </div>
 
         {/* Coming Soon Text */}
-        <h1 className="text-4xl font-bebas font-bold tracking-tight sm:text-6xl text-white uppercase">
+        <h1 className="text-4xl font-montserrat font-bold tracking-tight sm:text-6xl text-white uppercase">
           Coming Soon
         </h1>
         
         {/* Tagline */}
-        <p className="mt-4 text-xl font-bebas text-gray-300 uppercase">
+        <p className="mt-4 text-xl font-montserrat text-gray-300 uppercase">
           Something Exciting Is In The Works
         </p>
 
         {/* Email Signup Form */}
         <div className="mt-8">
           {status === 'success' ? (
-            <div className="bg-green-700 text-white p-4 rounded-md animate-fade-in font-bebas uppercase">
+            <div className="bg-green-700 text-white p-4 rounded-md animate-fade-in font-montserrat uppercase">
               Thank You For Signing Up! We’ll Keep You Updated.
             </div>
           ) : (
@@ -58,19 +58,19 @@ export default function Home() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="ENTER YOUR EMAIL"
                   required
-                  className="flex-1 px-4 py-2 border border-gray-400 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent font-bebas uppercase"
+                  className="flex-1 px-4 py-2 border border-gray-400 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent font-montserrat uppercase"
                 />
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`px-6 py-2 bg-black text-white font-bebas rounded-md hover:bg-gray-800 transition-colors uppercase
+                  className={`px-6 py-2 bg-black text-white font-montserrat rounded-md hover:bg-gray-800 transition-colors uppercase
                     ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
                   `}
                 >
                   {isSubmitting ? 'SIGNING UP...' : 'NOTIFY ME'}
                 </button>
               </div>
-              <p className="text-sm font-bebas text-gray-400 uppercase">
+              <p className="text-sm font-montserrat text-gray-400 uppercase">
                 Be The First To Know When We Launch.
               </p>
             </form>
