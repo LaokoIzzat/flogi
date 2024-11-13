@@ -50,7 +50,7 @@ export default function Home() {
         {/* Main content container with proper centering */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
           {/* Logo container */}
-          <div className="w-48 h-48 relative group mb-8">
+          <div className="w-48 h-48 relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-grey-500/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700" />
             <Image
               src="/images/Flogi-Pepsi-3D.gif"
