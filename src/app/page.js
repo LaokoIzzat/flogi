@@ -49,36 +49,35 @@ export default function Home() {
           height: '50vw',
           top: '-20vh',
           left: '-25vw',
-          background: 'rgba(59, 130, 246, 0.1)',
+          background: 'rgb(59, 130, 246, 0.1)',
           borderRadius: '9999px',
-          filter: 'blur(calc(2vw))'
+          filter: 'blur(calc(4vw))'
         }} />
         <div className="fixed hidden md:block" style={{
           width: '50vw',
           height: '50vw',
           bottom: '-20vh',
           right: '-25vw',
-          background: 'rgba(168, 85, 247, 0.1)',
+          background: 'rgb(168, 85, 247, 0.1)',
           borderRadius: '9999px',
-          filter: 'blur(calc(2vw))'
+          filter: 'blur(calc(4vw))'
         }} />
 
         {/* Mobile pulse effects */}
-        <div className="fixed top-0 -left-16 w-48 h-48 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse md:hidden" />
+        <div className="fixed top-0 -left-16 w-48 h-48 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse-delayed md:hidden" />
         <div className="fixed bottom-0 -right-16 w-48 h-48 bg-purple-500/30 rounded-full blur-3xl animate-slow-pulse-delayed md:hidden" />
         
         {/* Main content container with proper centering */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
           {/* Logo container */}
           <div className="w-48 h-48 relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-grey-500/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700" />
-            <Image
-              src="/images/Flogi-Pepsi-3D.gif"
-              alt="Flogi Pepsi Logo"
-              fill
-              priority
-              className="object-contain drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-3"
-            />
+          <Image
+            src="/images/Flogi-Pepsi-3D.gif"
+            alt="Flogi Pepsi Logo"
+            fill
+            priority
+            className="object-contain drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-3"
+          />
           </div>
 
           {/* Text content */}
