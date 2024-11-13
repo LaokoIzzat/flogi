@@ -11,20 +11,27 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     await new Promise(resolve => setTimeout(resolve, 1000));
-    setStatus('success');
-    setEmail('');
-    setIsSubmitting(false);
+    
+    setIsExiting(true);
     
     setTimeout(() => {
-      setIsExiting(true);
+      setStatus('success');
+      setEmail('');
+      setIsSubmitting(false);
+      setIsExiting(false);
+      setShowSuccess(true);
+    }, 300);
+    
+    setTimeout(() => {
+      setShowSuccess(false);
       setTimeout(() => {
         setStatus('');
-        setIsExiting(false);
       }, 300);
     }, 9000);
   };
@@ -34,15 +41,12 @@ export default function Home() {
       <main className="flex flex-1 flex-col items-center justify-center p-8 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
         <BGEffects />
         
-        {/* Enhanced noise texture with animation */}
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none animate-grain" />
         
-        {/* Responsive gradient orbs with slower pulse */}
         <div className="absolute md:top-1/4 md:-left-1/4 top-0 left-0 w-96 h-96 md:w-96 md:h-96 w-64 h-64 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse transform -translate-x-1/2 md:translate-x-0" />
         <div className="absolute md:bottom-1/4 md:-right-1/4 bottom-0 right-0 w-96 h-96 md:w-96 md:h-96 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-slow-pulse-delayed transform translate-x-1/2 md:translate-x-0" />
         
         <div className="text-center space-y-8 max-w-xl w-full relative z-10 backdrop-blur-md bg-black/10 p-8 sm:p-12 rounded-3xl border border-white/10 shadow-2xl">
-          {/* Logo container with enhanced hover effect */}
           <div className="w-48 h-48 mx-auto relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-grey-500/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700" />
             <Image
@@ -66,19 +70,21 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12 relative h-[88px]"> {/* Fixed height container matching form height */}
             {status === 'success' ? (
-              <div className={`bg-emerald-500/20 backdrop-blur-sm text-white px-6 py-4 rounded-xl 
-                            border border-emerald-500/30 flex items-center justify-center gap-3 
-                            shadow-lg shadow-emerald-500/10 transition-all duration-300
-                            ${!isExiting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-                <CheckCircle className="w-5 h-5 text-emerald-400" />
-                <span className="text-sm font-medium">
-                  Thank you for joining our waitlist. We'll be in touch soon.
-                </span>
+              <div className={`absolute inset-0 flex items-center bg-emerald-500/20 backdrop-blur-sm text-white px-6 
+                            border border-emerald-500/30 rounded-xl
+                            shadow-lg shadow-emerald-500/10 transition-all duration-500 ease-in-out
+                            ${showSuccess ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <div className="flex items-center justify-center gap-3 w-full">
+                  <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                  <span className="text-sm font-medium">
+                    Thank you for joining our waitlist. We'll be in touch soon.
+                  </span>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className={`transition-all duration-300 ease-in-out ${isExiting ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <div className="flex-1 relative group">
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-20 transition duration-500" />
@@ -118,7 +124,7 @@ export default function Home() {
                     )}
                   </button>
                 </div>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 mt-4">
                   Be among the first to experience our launch
                 </p>
               </form>
