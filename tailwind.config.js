@@ -15,6 +15,8 @@ module.exports = {
         'gradient-x': 'gradient-x 15s ease infinite',
         'grain': 'grain 8s steps(10) infinite',
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'slow-pulse': 'pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'slow-pulse-delayed': 'pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite 4s',
       },
       keyframes: {
         fadeIn: {
@@ -42,6 +44,10 @@ module.exports = {
           '70%': { transform: 'translate(0, 10%)' },
           '80%': { transform: 'translate(-15%, 0)' },
           '90%': { transform: 'translate(10%, 5%)' },
+        },
+        'pulse-slow': {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '0.5', transform: 'scale(1.1)' },
         },
       },
       colors: {

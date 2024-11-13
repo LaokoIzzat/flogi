@@ -42,10 +42,30 @@ export default function Home() {
         <BGEffects />
         
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none animate-grain" />
-        
-        {/* Modified pulse effects with smaller size on mobile */}
-        <div className="fixed md:top-1/4 md:-left-1/4 top-0 -left-16 w-48 md:w-96 h-48 md:h-96 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse" />
-        <div className="fixed md:bottom-1/4 md:-right-1/4 bottom-0 -right-16 w-48 md:w-96 h-48 md:h-96 bg-purple-500/20 rounded-full blur-3xl animate-slow-pulse-delayed" />
+
+        {/* Desktop pulse effects */}
+        <div className="fixed hidden md:block" style={{
+          width: '50vw',
+          height: '50vw',
+          top: '20vh',
+          left: '-25vw',
+          background: 'rgba(59, 130, 246, 0.05)',
+          borderRadius: '9999px',
+          filter: 'blur(calc(2vw))'
+        }} />
+        <div className="fixed hidden md:block" style={{
+          width: '50vw',
+          height: '50vw',
+          bottom: '20vh',
+          right: '-25vw',
+          background: 'rgba(168, 85, 247, 0.05)',
+          borderRadius: '9999px',
+          filter: 'blur(calc(2vw))'
+        }} />
+
+        {/* Mobile pulse effects */}
+        <div className="fixed top-0 -left-16 w-48 h-48 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse md:hidden" />
+        <div className="fixed bottom-0 -right-16 w-48 h-48 bg-purple-500/30 rounded-full blur-3xl animate-slow-pulse-delayed md:hidden" />
         
         {/* Main content container with proper centering */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
