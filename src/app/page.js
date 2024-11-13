@@ -76,7 +76,7 @@ export default function Home() {
             alt="Flogi Pepsi Logo"
             fill
             priority
-            className="object-contain drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-3"
+            className="object-contain drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110"
           />
           </div>
 
