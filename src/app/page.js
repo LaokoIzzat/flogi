@@ -47,18 +47,18 @@ export default function Home() {
         <div className="fixed hidden md:block" style={{
           width: '50vw',
           height: '50vw',
-          top: '20vh',
+          top: '-20vh',
           left: '-25vw',
-          background: 'rgba(59, 130, 246, 0.05)',
+          background: 'rgba(59, 130, 246, 0.1)',
           borderRadius: '9999px',
           filter: 'blur(calc(2vw))'
         }} />
         <div className="fixed hidden md:block" style={{
           width: '50vw',
           height: '50vw',
-          bottom: '20vh',
+          bottom: '-20vh',
           right: '-25vw',
-          background: 'rgba(168, 85, 247, 0.05)',
+          background: 'rgba(168, 85, 247, 0.1)',
           borderRadius: '9999px',
           filter: 'blur(calc(2vw))'
         }} />
