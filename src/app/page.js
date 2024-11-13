@@ -43,89 +43,96 @@ export default function Home() {
         
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none animate-grain" />
         
-        <div className="absolute md:top-1/4 md:-left-1/4 top-0 left-0 w-96 h-96 md:w-96 md:h-96 w-64 h-64 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse transform -translate-x-1/2 md:translate-x-0" />
-        <div className="absolute md:bottom-1/4 md:-right-1/4 bottom-0 right-0 w-96 h-96 md:w-96 md:h-96 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-slow-pulse-delayed transform translate-x-1/2 md:translate-x-0" />
+        {/* Adjusted positioning of background effects */}
+        <div className="absolute md:top-1/4 md:-left-1/4 top-0 -left-32 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse" />
+        <div className="absolute md:bottom-1/4 md:-right-1/4 bottom-0 -right-32 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-slow-pulse-delayed" />
         
-        <div className="w-48 h-48 mx-auto relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-grey-500/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700" />
-          <Image
-            src="/images/Flogi-Pepsi-3D.gif"
-            alt="Flogi Pepsi Logo"
-            fill
-            priority
-            className="object-contain drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-3"
-          />
-        </div>
+        {/* Main content container with proper centering */}
+        <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
+          {/* Logo container */}
+          <div className="w-48 h-48 relative group mb-8">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-grey-500/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700" />
+            <Image
+              src="/images/Flogi-Pepsi-3D.gif"
+              alt="Flogi Pepsi Logo"
+              fill
+              priority
+              className="object-contain drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-3"
+            />
+          </div>
 
-        <div className="space-y-4 w-full text-center">
-          <h1 className="text-4xl sm:text-5xl font-light tracking-tight md:text-6xl text-white">
-            <span className="font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent animate-gradient-x">
-              Coming Soon
-            </span>
-          </h1>
-          
-          <p className="text-lg text-gray-400 font-light tracking-wide">
-            Something extraordinary is in development
-          </p>
-        </div>
-
-        <div className="mt-12 relative min-h-[120px] w-full max-w-md">
-          {status === 'success' ? (
-            <div className={`absolute inset-0 bg-emerald-500/20 backdrop-blur-sm text-white px-6 py-4 rounded-xl 
-                          border border-emerald-500/30 flex items-center justify-center gap-3 
-                          shadow-lg shadow-emerald-500/10 transition-all duration-500 ease-in-out
-                          ${showSuccess ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <CheckCircle className="w-5 h-5 text-emerald-400" />
-              <span className="text-sm font-medium">
-                Thank you for joining our waitlist. We'll be in touch soon.
+          {/* Text content */}
+          <div className="space-y-4 mb-12">
+            <h1 className="text-4xl sm:text-5xl font-light tracking-tight md:text-6xl text-white">
+              <span className="font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent animate-gradient-x">
+                Coming Soon
               </span>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className={`transition-all duration-300 ease-in-out ${isExiting ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-1 relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-20 transition duration-500" />
-                  
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onFocus={() => setIsFocused(true)}
-                    onBlur={() => setIsFocused(false)}
-                    placeholder="Enter your email"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 text-white rounded-xl
-                              border border-white/10 focus:border-white/20
-                              focus:outline-none focus:ring-1 focus:ring-white/20
-                              placeholder:text-gray-500 text-sm transition-all duration-300
-                              relative backdrop-blur-sm"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-6 py-3 bg-white text-black rounded-xl font-medium
-                            transition-all duration-300 hover:bg-opacity-90
-                            flex items-center justify-center gap-2
-                            disabled:opacity-50 disabled:cursor-not-allowed
-                            shadow-lg shadow-white/10 hover:shadow-white/20
-                            hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  {isSubmitting ? (
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                  ) : (
-                    <>
-                      <span>Notify Me</span>
-                      <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    </>
-                  )}
-                </button>
+            </h1>
+            
+            <p className="text-lg text-gray-400 font-light tracking-wide">
+              Something extraordinary is in development
+            </p>
+          </div>
+
+          {/* Form section */}
+          <div className="w-full max-w-md relative min-h-[70px]">
+            {status === 'success' ? (
+              <div className={`absolute inset-0 bg-emerald-500/20 backdrop-blur-sm text-white px-6 py-4 rounded-xl 
+                            border border-emerald-500/30 flex items-center justify-center gap-3 
+                            shadow-lg shadow-emerald-500/10 transition-all duration-500 ease-in-out
+                            ${showSuccess ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <CheckCircle className="w-5 h-5 text-emerald-400" />
+                <span className="text-sm font-medium">
+                  Thank you for joining our waitlist. We'll be in touch soon.
+                </span>
               </div>
-              <p className="text-sm text-gray-500 mt-4 text-center">
-                Be among the first to experience our launch
-              </p>
-            </form>
-          )}
+            ) : (
+              <form onSubmit={handleSubmit} className={`w-full transition-all duration-300 ease-in-out ${isExiting ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="flex-1 relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-20 transition duration-500" />
+                    
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onFocus={() => setIsFocused(true)}
+                      onBlur={() => setIsFocused(false)}
+                      placeholder="Enter your email"
+                      required
+                      className="w-full px-4 py-3 bg-white/5 text-white rounded-xl
+                                border border-white/10 focus:border-white/20
+                                focus:outline-none focus:ring-1 focus:ring-white/20
+                                placeholder:text-gray-500 text-sm transition-all duration-300
+                                relative backdrop-blur-sm"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-6 py-3 bg-white text-black rounded-xl font-medium
+                              transition-all duration-300 hover:bg-opacity-90
+                              flex items-center justify-center gap-2
+                              disabled:opacity-50 disabled:cursor-not-allowed
+                              shadow-lg shadow-white/10 hover:shadow-white/20
+                              hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    {isSubmitting ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      <>
+                        <span>Notify Me</span>
+                        <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                      </>
+                    )}
+                  </button>
+                </div>
+                <p className="text-sm text-gray-500 mt-4 text-center">
+                  Be among the first to experience our launch
+                </p>
+              </form>
+            )}
+          </div>
         </div>
       </main>
     </div>
