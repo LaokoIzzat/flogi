@@ -28,14 +28,22 @@
   
   body {
     font-family: 'Montserrat', sans-serif;
+    background-color: black;
     overflow: hidden;
     position: fixed;
     width: 100%;
     height: 100%;
-    /* Add orientation lock support */
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    background-color: black;
+  }
+
+  /* Enable scrolling only on mobile landscape */
+  @media (max-width: 767px) and (orientation: landscape) {
+    body {
+      overflow: auto;
+      position: static;
+      height: auto;
+    }
   }
 
   @supports (view-transition-name: none) {
