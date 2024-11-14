@@ -1,82 +1,34 @@
 'use client';
-import { useState } from 'react';
-import Image from 'next/image';
+
+import Background from './layout/Background.js';
+import Logo from './components/Logo.js';
+import NotificationForm from './components/NotificationForm';
+import SocialLinks from './components/SocialLinks.js';
 
 export default function Home() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate API call - replace this with your actual API endpoint
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setStatus('success');
-    setEmail('');
-    setIsSubmitting(false);
-  };
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-custom-gray">
-      <div className="text-center space-y-8 animate-fade-in max-w-md w-full">
-        {/* Logo Container */}
-        <div className="w-48 h-48 mx-auto mb-8 relative">
-          <Image
-            src="/images/Flogi-Pepsi-3D.gif" // Updated to GIF path
-            alt="Flogi Pepsi Logo"
-            fill
-            priority
-            className="object-contain"
-          />
+    <div className="min-h-screen flex flex-col">
+      <main className="flex flex-1 flex-col items-center justify-center p-8 bg-gradient-to-b from-gray-900 to-black relative">
+        <Background />
+        {/* Main content container with proper centering */}
+        <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
+          <Logo />
+          {/* Text content */}
+          <div className="space-y-4 mb-12">
+            <h1 className="text-4xl sm:text-5xl font-light tracking-tight md:text-6xl text-white">
+              <span className="font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent animate-gradient-x">
+                Coming Soon
+              </span>
+            </h1>
+            
+            <p className="text-lg text-gray-400 font-light tracking-wide">
+              Something extraordinary is in development
+            </p>
+          </div>
+          <NotificationForm />
+          <SocialLinks />
         </div>
-
-        {/* Coming Soon Text */}
-        <h1 className="text-4xl font-montserrat font-bold tracking-tight sm:text-6xl text-white uppercase">
-          Coming Soon
-        </h1>
-        
-        {/* Tagline */}
-        <p className="mt-4 text-xl font-montserrat text-gray-300 uppercase">
-          Something Exciting Is In The Works
-        </p>
-
-        {/* Email Signup Form */}
-        <div className="mt-8">
-          {status === 'success' ? (
-            <div className="bg-green-700 text-white p-4 rounded-md animate-fade-in font-montserrat uppercase">
-              Thank You For Signing Up! We’ll Keep You Updated.
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ENTER YOUR EMAIL"
-                  required
-                  className="flex-1 px-4 py-2 border border-gray-400 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent font-montserrat uppercase"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`px-6 py-2 bg-black text-white font-montserrat rounded-md hover:bg-gray-800 transition-colors uppercase
-                    ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
-                  `}
-                >
-                  {isSubmitting ? 'SIGNING UP...' : 'NOTIFY ME'}
-                </button>
-              </div>
-              <p className="text-sm font-montserrat text-gray-400 uppercase">
-                Be The First To Know When We Launch.
-              </p>
-            </form>
-          )}
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
