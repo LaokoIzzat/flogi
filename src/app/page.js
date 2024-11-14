@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Send, Loader2, CheckCircle } from 'lucide-react';
+import { Send, Loader2, CheckCircle, Instagram } from 'lucide-react';
 import BGEffects from './components/bgeffects';
 
 export default function Home() {
@@ -71,13 +71,13 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
           {/* Logo container */}
           <div className="w-48 h-48 relative group">
-          <Image
-            src="/images/Flogi-Pepsi-3D.gif"
-            alt="Flogi Pepsi Logo"
-            fill
-            priority
-            className="object-contain drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110"
-          />
+            <Image
+              src="/images/Flogi-Pepsi-3D.gif"
+              alt="Flogi Pepsi Logo"
+              fill
+              priority
+              className="object-contain drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110"
+            />
           </div>
 
           {/* Text content */}
@@ -146,11 +146,51 @@ export default function Home() {
                     )}
                   </button>
                 </div>
-                <p className="text-sm text-gray-500 mt-4 text-center">
-                  Be among the first to experience our launch
-                </p>
               </form>
             )}
+          </div>
+
+          {/* Social Media Icons - Under content */}
+          <div className="mt-6 inline-flex items-center justify-center gap-12">
+            <a
+              href="https://instagram.com/flogi.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transform transition-all duration-200 text-gray-400 hover:text-pink-500 hover:scale-110 
+                        outline-none focus:outline-none active:outline-none rounded-lg p-2"
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                WebkitTouchCallout: 'none',
+                WebkitUserSelect: 'none',
+                userSelect: 'none',
+                outline: 'none'
+              }}
+              aria-label="Instagram"
+            >
+              <Instagram className="w-8 h-8" />
+            </a>
+            <a
+              href="https://tiktok.com/@yourhandle"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transform transition-all duration-200 text-gray-400 hover:text-white hover:scale-110 
+                        outline-none focus:outline-none active:outline-none rounded-lg p-2"
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                WebkitTouchCallout: 'none',
+                WebkitUserSelect: 'none',
+                userSelect: 'none',
+                outline: 'none'
+              }}
+              aria-label="TikTok"
+            >
+              <svg 
+                viewBox="0 0 24 24" 
+                className="w-8 h-8 fill-current"
+              >
+                <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z"/>
+              </svg>
+            </a>
           </div>
         </div>
       </main>
