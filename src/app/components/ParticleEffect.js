@@ -1,7 +1,8 @@
 'use client';
+
 import React, { useEffect, useRef } from 'react';
 
-const BGEffects = () => {
+const ParticleEffect = () => {
   const canvasRef = useRef(null);
   const animationFrameIdRef = useRef(null);
   const timeRef = useRef(0);
@@ -119,4 +120,4 @@ const BGEffects = () => {
   );
 };
 
-export default BGEffects;
+export default ParticleEffect;
