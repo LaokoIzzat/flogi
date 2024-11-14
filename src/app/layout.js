@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Flogi",
+  title: "FloGi",
   description: "Premium athletic wear for combat sports and fitness. Shop high-quality rashguards and performance shorts for training and competition.",
 };
 
