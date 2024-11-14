@@ -14,16 +14,15 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
           <Logo />
           {/* Text content */}
-          <div className="space-y-4 mb-12">
+          <p className="text-lg text-gray-400 font-light tracking-wide mb-6">
+                Premium athletic wear for combat sports and fitness
+          </p>
+          <div className="space-y-6 mb-8">
             <h1 className="text-4xl sm:text-5xl font-light tracking-tight md:text-6xl text-white">
               <span className="font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent animate-gradient-x">
                 Coming Soon
               </span>
             </h1>
-            
-            <p className="text-lg text-gray-400 font-light tracking-wide">
-              Something extraordinary is in development
-            </p>
           </div>
           <NotificationForm />
           <SocialLinks />
