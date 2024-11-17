@@ -10,7 +10,7 @@ export default function SuccessMessage({ show }) {
                     ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
       <CheckCircle className="w-5 h-5 text-emerald-400" />
       <span className="text-sm font-medium">
-        Thank you for joining our waitlist. We'll be in touch soon.
+        Thank you for joining our waitlist. We&apos;ll be in touch soon.
       </span>
     </div>
   );
