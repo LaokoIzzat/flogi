@@ -38,7 +38,7 @@
   }
 
   /* Enable scrolling on landscape */
-  @media (max-width: 926px) and (orientation: landscape) {
+  @media (max-width: 933px) and (orientation: landscape) {
     html, body {
       overflow-y: auto !important;
       position: relative !important;
