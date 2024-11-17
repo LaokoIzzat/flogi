@@ -37,12 +37,13 @@
     transform: translate3d(0, 0, 0);
   }
 
-  /* Enable scrolling only on mobile landscape */
-  @media (max-width: 767px) and (orientation: landscape) {
-    body {
-      overflow: auto;
-      position: static;
-      height: auto;
+  /* Enable scrolling on landscape */
+  @media (orientation: landscape) {
+    html, body {
+      overflow-y: auto !important;
+      position: relative !important;
+      height: auto !important;
+      min-height: 100%;
     }
   }
 
