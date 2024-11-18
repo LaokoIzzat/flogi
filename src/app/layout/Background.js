@@ -1,13 +1,29 @@
-'use client';
-
-import { memo } from 'react';
+import React, { memo } from 'react';
 import ParticleEffect from '../components/ParticleEffect';
+import Image from 'next/image'
+
+ 
+function GymBackdrop() {
+  return (
+    <Image
+      src="/images/backdrop.png"
+      alt="MMA gym"
+      quality={100}
+      fill
+      sizes="100vw"
+      style={{
+        objectFit: 'cover',
+        opacity: 0.1
+      }}
+    />
+  )
+}
 
 const Background = memo(() => (
   <>
-    <ParticleEffect />
-    <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none animate-grain" />
-    
+    <GymBackdrop/>
+    <ParticleEffect/>
+
     {/* Desktop pulse effects */}
     <div className="fixed hidden md:block" style={{
       width: '50vw',
@@ -23,7 +39,7 @@ const Background = memo(() => (
       height: '50vw',
       bottom: '-20vh',
       right: '-25vw',
-      background: 'rgb(168, 85, 247, 0.1)',
+      background: 'rgb(168, 85, 247, 0.05)',
       borderRadius: '9999px',
       filter: 'blur(calc(4vw))'
     }} />

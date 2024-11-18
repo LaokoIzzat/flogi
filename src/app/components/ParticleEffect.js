@@ -19,7 +19,7 @@ class Particle {
     this.updatePosition(width, height);
     
     // Simplified particle properties
-    this.size = Math.random() * 1.5 + 0.5; // Reduced size range
+    this.size = Math.random() * 1.5 + 1; // Reduced size range
     this.speedX = (Math.random() * 0.1 - 0.05) * 0.8; // Reduced speed
     this.speedY = (Math.random() * 0.1 - 0.05) * 0.8;
     this.baseOpacity = Math.random() * 0.25 + 0.1;
