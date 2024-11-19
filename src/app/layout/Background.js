@@ -23,10 +23,11 @@ const useResponsiveLayout = () => {
 function GymBackdrop({ isPortrait }) {
   return (
     <Image
-      src={isPortrait ? "/images/portrait-bg.png" : "/images/landscape-bg.png"}
+      src={isPortrait ? "/images/portrait-bg.webp" : "/images/landscape-bg.webp"}
       alt="MMA gym"
       quality={100}
       fill
+      priority
       sizes="100vw"
       style={{
         objectFit: 'cover',
