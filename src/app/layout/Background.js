@@ -1,54 +1,82 @@
-import React, { memo } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import ParticleEffect from '../components/ParticleEffect';
-import Image from 'next/image'
+import Image from 'next/image';
 
- 
-function GymBackdrop() {
+const useResponsiveLayout = () => {
+  const [isPortrait, setIsPortrait] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkLayout = () => {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+      setIsMobile(window.innerWidth < 768); // 768px is Tailwind's md breakpoint
+    };
+
+    checkLayout();
+    window.addEventListener('resize', checkLayout);
+    return () => window.removeEventListener('resize', checkLayout);
+  }, []);
+
+  return { isPortrait, isMobile };
+};
+
+function GymBackdrop({ isPortrait }) {
   return (
     <Image
-      src="/images/backdrop.png"
+      src={isPortrait ? "/images/portrait-bg.webp" : "/images/landscape-bg.webp"}
       alt="MMA gym"
       quality={100}
       fill
+      priority
       sizes="100vw"
       style={{
         objectFit: 'cover',
-        opacity: 0.1
+        opacity: 0.08
       }}
     />
-  )
+  );
 }
 
-const Background = memo(() => (
-  <>
-    <GymBackdrop/>
-    <ParticleEffect/>
+const Background = memo(() => {
+  const { isPortrait, isMobile } = useResponsiveLayout();
 
-    {/* Desktop pulse effects */}
-    <div className="fixed hidden md:block" style={{
-      width: '50vw',
-      height: '50vw',
-      top: '-20vh',
-      left: '-25vw',
-      background: 'rgb(59, 130, 246, 0.1)',
-      borderRadius: '9999px',
-      filter: 'blur(calc(4vw))'
-    }} />
-    <div className="fixed hidden md:block" style={{
-      width: '50vw',
-      height: '50vw',
-      bottom: '-20vh',
-      right: '-25vw',
-      background: 'rgb(168, 85, 247, 0.05)',
-      borderRadius: '9999px',
-      filter: 'blur(calc(4vw))'
-    }} />
+  return (
+    <>
+      <GymBackdrop isPortrait={isPortrait} />
+      <ParticleEffect />
 
-    {/* Mobile pulse effects */}
-    <div className="fixed top-0 -left-16 w-48 h-48 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse-delayed md:hidden" />
-    <div className="fixed bottom-0 -right-16 w-48 h-48 bg-purple-500/30 rounded-full blur-3xl animate-slow-pulse-delayed md:hidden" />
-  </>
-));
+      {!isMobile ? (
+        // Desktop pulse effects
+        <>
+          <div className="fixed" style={{
+            width: '50vw',
+            height: '50vw',
+            top: '-20vh',
+            left: '-25vw',
+            background: 'rgb(59, 130, 246, 0.1)',
+            borderRadius: '9999px',
+            filter: 'blur(calc(4vw))'
+          }} />
+          <div className="fixed" style={{
+            width: '50vw',
+            height: '50vw',
+            bottom: '-20vh',
+            right: '-25vw',
+            background: 'rgb(168, 85, 247, 0.05)',
+            borderRadius: '9999px',
+            filter: 'blur(calc(4vw))'
+          }} />
+        </>
+      ) : (
+        // Mobile pulse effects
+        <>
+          <div className="fixed top-0 -left-16 w-48 h-48 bg-blue-500/30 rounded-full blur-3xl animate-slow-pulse-delayed" />
+          <div className="fixed bottom-0 -right-16 w-48 h-48 bg-purple-500/30 rounded-full blur-3xl animate-slow-pulse-delayed" />
+        </>
+      )}
+    </>
+  );
+});
 
 Background.displayName = 'Background';
 export default Background;

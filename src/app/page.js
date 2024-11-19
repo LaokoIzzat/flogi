@@ -18,7 +18,7 @@ const Home = () => {
             <Logo />
             
             <p className="text-lg text-gray-400 font-light tracking-wide mb-6">
-              Premium athletic wear for combat sports and fitness
+            Premium athletic wear for combat sports and fitness
             </p>
             
             <div className="space-y-6 mb-8">
