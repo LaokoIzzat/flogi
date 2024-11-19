@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <div className="w-48 h-48 relative group">
       <Image
-        src="/images/flogi-pepsi-3d.gif"
+        src="/images/Flogi-Pepsi-3D.gif"
         alt="Flogi Pepsi Logo"
         fill
         priority
