@@ -10,15 +10,18 @@ const Home = () => {
   return (
     <div className="scroll-container">
       <main className="min-h-screen flex flex-col">
-        <div className="flex-1 flex flex-col items-center justify-center p-8 pb-16 sm:pb-8 bg-gradient-to-b from-gray-900 to-black relative">
+        <div className="relative flex-1 flex flex-col items-center justify-center p-8 pb-16 sm:pb-8 bg-black">
           <Background />
+
+          {/* Grid background */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
           
           {/* Main content container */}
           <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
             <Logo />
             
             <p className="text-lg text-gray-400 font-light tracking-wide mb-6">
-            Premium athletic wear for combat sports and fitness
+              Premium athletic wear for combat sports and fitness
             </p>
             
             <div className="space-y-6 mb-8">
@@ -29,10 +32,10 @@ const Home = () => {
               </h1>
             </div>
             
-            <NotificationForm />
+              <NotificationForm />
             
-            {/* Adjusted spacing for social links */}
-            <div className="mt=2">
+            {/* Social links */}
+            <div className="mt-0">
               <SocialLinks />
             </div>
           </div>
