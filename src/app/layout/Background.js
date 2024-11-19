@@ -5,67 +5,69 @@ import Image from 'next/image';
 const useResponsiveLayout = () => {
   const [isPortrait, setIsPortrait] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
+  const [isClient, setIsClient] = useState(false);
+  
   useEffect(() => {
-    const checkLayout = () => {
-      setIsPortrait(window.innerHeight > window.innerWidth);
-      setIsMobile(window.innerWidth < 768); // 768px is Tailwind's md breakpoint
-    };
+    setIsClient(true);
+    const portraitMql = window.matchMedia('(orientation: portrait)');
+    const mobileMql = window.matchMedia('(max-width: 767px)');
 
-    checkLayout();
-    window.addEventListener('resize', checkLayout);
-    return () => window.removeEventListener('resize', checkLayout);
+    setIsPortrait(portraitMql.matches);
+    setIsMobile(mobileMql.matches);
+
+    const handleOrientationChange = (e) => setIsPortrait(e.matches);
+    const handleMobileChange = (e) => setIsMobile(e.matches);
+
+    portraitMql.addEventListener('change', handleOrientationChange);
+    mobileMql.addEventListener('change', handleMobileChange);
+
+    return () => {
+      portraitMql.removeEventListener('change', handleOrientationChange);
+      mobileMql.removeEventListener('change', handleMobileChange);
+    };
   }, []);
 
-  return { isPortrait, isMobile };
+  return { isPortrait, isMobile, isClient };
 };
 
-function GymBackdrop({ isPortrait }) {
+function GymBackdrop({ isPortrait, isClient }) {
+  if (!isClient) return null;
+
   return (
-    <Image
-      src={isPortrait ? "/images/portrait-bg.webp" : "/images/landscape-bg.webp"}
-      alt="MMA gym"
-      quality={100}
-      fill
-      priority
-      sizes="100vw"
-      style={{
-        objectFit: 'cover',
-        opacity: 0.08
-      }}
-    />
+    <div className="absolute inset-0 transition-opacity duration-500">
+      <Image
+        src={isPortrait ? "/images/portrait-bg.webp" : "/images/landscape-bg.webp"}
+        alt="MMA gym"
+        quality={100}
+        fill
+        priority
+        sizes="100vw"
+        style={{
+          objectFit: 'cover',
+          opacity: 0.08
+        }}
+      />
+    </div>
   );
 }
 
 const Background = memo(() => {
-  const { isPortrait, isMobile } = useResponsiveLayout();
+  const { isPortrait, isMobile, isClient } = useResponsiveLayout();
+
+  if (!isClient) {
+    return <ParticleEffect />;
+  }
 
   return (
     <>
-      <GymBackdrop isPortrait={isPortrait} />
+      <GymBackdrop isPortrait={isPortrait} isClient={isClient} />
       <ParticleEffect />
 
       {!isMobile ? (
         // Desktop pulse effects
         <>
-          <div className="fixed" style={{
-            width: '50vw',
-            height: '50vw',
-            top: '-20vh',
-            left: '-25vw',
-            background: 'rgb(59, 130, 246, 0.1)',
-            borderRadius: '9999px',
-            filter: 'blur(calc(4vw))'
-          }} />
-          <div className="fixed" style={{
-            width: '50vw',
-            height: '50vw',
-            bottom: '-20vh',
-            right: '-25vw',
-            background: 'rgb(168, 85, 247, 0.05)',
-            borderRadius: '9999px',
-            filter: 'blur(calc(4vw))'
-          }} />
+          <div className="fixed w-[50vw] h-[50vw] -top-[20vh] -left-[25vw] bg-blue-500/10 rounded-full blur-3xl" />
+          <div className="fixed w-[50vw] h-[50vw] -bottom-[20vh] -right-[25vw] bg-purple-500/5 rounded-full blur-3xl" />
         </>
       ) : (
         // Mobile pulse effects
