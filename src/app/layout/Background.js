@@ -54,14 +54,9 @@ function GymBackdrop({ isPortrait, isClient }) {
 const Background = memo(() => {
   const { isPortrait, isMobile, isClient } = useResponsiveLayout();
 
-  if (!isClient) {
-    return <ParticleEffect />;
-  }
-
   return (
     <>
       <GymBackdrop isPortrait={isPortrait} isClient={isClient} />
-      <ParticleEffect />
 
       {!isMobile ? (
         // Desktop pulse effects
