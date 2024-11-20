@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <div className="w-48 h-48 relative group">
       <Image
-        src="/images/logo.webp"
+        src="https://xwhyozzrqwi1qkiy.public.blob.vercel-storage.com/logo-w7pJetFvpzyVCqRqVijTZ5v8KAeOZD.webp"
         alt="Flogi Pepsi Logo"
         fill
         priority
