@@ -1,5 +1,4 @@
 import React, { memo, useState, useEffect } from 'react';
-import ParticleEffect from '../components/ParticleEffect';
 import Image from 'next/image';
 
 const useResponsiveLayout = () => {
@@ -36,7 +35,7 @@ function GymBackdrop({ isPortrait, isClient }) {
   return (
     <div className="absolute inset-0 transition-opacity duration-500">
       <Image
-        src={isPortrait ? "/images/portrait-bg.webp" : "/images/landscape-bg.webp"}
+        src={isPortrait ? "/images/portrait.webp" : "/images/landscape.webp"}
         alt="MMA gym"
         quality={100}
         fill
@@ -44,7 +43,7 @@ function GymBackdrop({ isPortrait, isClient }) {
         sizes="100vw"
         style={{
           objectFit: 'cover',
-          opacity: 0.08
+          opacity: 0.1
         }}
       />
     </div>

@@ -14,7 +14,7 @@ const Home = () => {
           <Background />
 
           {/* Grid background */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
           
           {/* Main content container */}
           <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
@@ -32,7 +32,7 @@ const Home = () => {
               </h1>
             </div>
             
-              <NotificationForm />
+            <NotificationForm />
             
             {/* Social links */}
             <div className="mt-0">
