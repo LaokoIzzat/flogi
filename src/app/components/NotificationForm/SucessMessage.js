@@ -23,7 +23,7 @@ export default function SuccessMessage({ show }) {
             </div>
             <div className="flex flex-col items-center space-y-1.5 text-center">
               <p className="text-sm text-white/75">
-                Thank you for joining our waitlist. We'll be in touch soon.
+              Thank you for joining our waitlist. We&apos;ll be in touch soon.
               </p>
             </div>
           </div>
