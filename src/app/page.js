@@ -37,11 +37,8 @@ const Home = () => {
             </div>
             
             <NotificationForm />
+            <SocialLinks />
             
-            {/* Social links */}
-            <div className="mt-0">
-              <SocialLinks />
-            </div>
           </div>
         </div>
       </main>

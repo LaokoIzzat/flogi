@@ -31,7 +31,7 @@ const socialStyles = {
 
 export default function SocialLinks() {
   return (
-    <div className="mt-6 inline-flex items-center justify-center gap-12">
+    <div className="mt-8 sm:mt-2 inline-flex items-center justify-center gap-12">
       {socialLinks.map(({ platform, url, hoverColor, icon }) => (
         <a
           key={platform}

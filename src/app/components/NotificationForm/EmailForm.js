@@ -36,13 +36,16 @@ export default function EmailForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto h-11 px-6 bg-white text-black rounded-xl font-medium
+          className="w-full sm:w-auto h-11 px-6 bg-gray-850/95 text-white rounded-xl font-medium
                     transition-all duration-200 ease-out
-                    hover:bg-opacity-90 hover:scale-[0.98]
+                    hover:bg-gray-900/100 hover:scale-[0.98]
                     active:scale-95
                     flex items-center justify-center gap-2
                     disabled:opacity-50 disabled:cursor-not-allowed
-                    disabled:hover:scale-100"
+                    disabled:hover:scale-100
+                    border border-white-700/50
+                    shadow-lg shadow-gray-900/20
+                    backdrop-blur-sm"
         >
           {isSubmitting ? (
             <Loader2 className="w-5 h-5 animate-spin" />
