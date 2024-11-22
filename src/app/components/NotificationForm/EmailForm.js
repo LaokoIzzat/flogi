@@ -1,7 +1,8 @@
 'use client';
 
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, AlertCircle, Check } from 'lucide-react';
 import isEmail from 'validator/lib/isEmail';
+import { useState } from 'react';
 
 export default function EmailForm({ 
   email, 
@@ -10,6 +11,9 @@ export default function EmailForm({
   isSubmitting, 
   isExiting 
 }) {
+  const [touched, setTouched] = useState(false);
+  const [focused, setFocused] = useState(false);
+  
   const hasValidEmail = email.length > 0 && isEmail(email, {
     allow_utf8_local_part: false,
     require_tld: true,
@@ -19,30 +23,66 @@ export default function EmailForm({
     host_blacklist: [],
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTouched(true);
+    if (hasValidEmail) {
+      onSubmit(e);
+    }
+  };
+
+  const showValidation = touched && !focused && email.length > 0;
+
   return (
-    <form onSubmit={onSubmit} className={`w-full transition-all duration-300 ease-in-out ${isExiting ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
+    <form onSubmit={handleSubmit} className={`w-full transition-all duration-300 ease-in-out ${isExiting ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1 relative group">
           <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/50 to-purple-500/50 opacity-0 
                         group-hover:opacity-[0.08] blur-sm transition-opacity duration-300" />
           
-          <input
-            type="email"
-            value={email}
-            onChange={onEmailChange}
-            placeholder="Enter your email"
-            required
-            className="w-full h-11 px-4 bg-white/5 text-white rounded-xl
-                      border border-white/10 
-                      group-hover:border-white/20
-                      focus:border-white/20 focus:bg-white/[0.07]
-                      outline-none
-                      placeholder:text-gray-500 text-sm 
-                      transition-all duration-300
-                      backdrop-blur-sm
-                      relative"
-          />
+          <div className="relative flex items-center">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => {
+                onEmailChange(e);
+                setTouched(true);
+              }}
+              onBlur={() => {
+                setTouched(true);
+                setFocused(false);
+              }}
+              onFocus={() => setFocused(true)}
+              placeholder="Enter your email"
+              required
+              aria-invalid={showValidation && !hasValidEmail}
+              className={`w-full h-11 px-4 bg-white/5 text-white rounded-xl
+                        border transition-all duration-300
+                        outline-none
+                        placeholder:text-gray-500 text-sm 
+                        backdrop-blur-sm
+                        pr-10
+                        ${showValidation
+                          ? hasValidEmail 
+                            ? 'border-green-500/30 focus:border-green-500/50 bg-green-500/5' 
+                            : 'border-red-500/30 focus:border-red-500/50 bg-red-500/5'
+                          : 'border-white/10 group-hover:border-white/20 focus:border-white/20 focus:bg-white/[0.07]'
+                        }`}
+            />
+            
+            {/* Validation icon - only shows after blur */}
+            {showValidation && (
+              <div className={`absolute right-3 transition-opacity duration-200 ${hasValidEmail ? 'text-green-500' : 'text-red-400'}`}>
+                {hasValidEmail ? (
+                  <Check className="w-4 h-4" />
+                ) : (
+                  <AlertCircle className="w-4 h-4" />
+                )}
+              </div>
+            )}
+          </div>
         </div>
+
         <div className="relative w-full sm:w-auto">
           <button
             type="submit"
