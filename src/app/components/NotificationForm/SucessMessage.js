@@ -17,10 +17,10 @@ export default function SuccessMessage({ show }) {
                         shadow-lg shadow-gray-900/20 
                         p-6 space-y-3
                         max-w-sm
-                        before:absolute before:inset-0 before:rounded-xl
-                        before:bg-gradient-to-br before:from-gray-800/50 before:via-gray-700/50 before:to-gray-800/50
-                        before:opacity-0 before:hover:opacity-100
-                        before:transition-opacity before:duration-500
+                        [@media(hover:hover)]:before:absolute [@media(hover:hover)]:before:inset-0 [@media(hover:hover)]:before:rounded-xl
+                        [@media(hover:hover)]:before:bg-gradient-to-br [@media(hover:hover)]:before:from-gray-800/50 [@media(hover:hover)]:before:via-gray-700/50 [@media(hover:hover)]:before:to-gray-800/50
+                        [@media(hover:hover)]:before:opacity-0 [@media(hover:hover)]:before:hover:opacity-100
+                        [@media(hover:hover)]:before:transition-opacity [@media(hover:hover)]:before:duration-500
                         relative overflow-hidden">
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-sm" />

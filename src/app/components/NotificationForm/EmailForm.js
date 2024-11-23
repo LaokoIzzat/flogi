@@ -13,6 +13,7 @@ export default function EmailForm({
 }) {
   const [touched, setTouched] = useState(false);
   const [focused, setFocused] = useState(false);
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
   
   const hasValidEmail = email.length > 0 && isEmail(email, {
     allow_utf8_local_part: false,
@@ -25,20 +26,33 @@ export default function EmailForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setAttemptedSubmit(true);
     setTouched(true);
+    setFocused(false);
+
     if (hasValidEmail) {
       onSubmit(e);
     }
   };
 
-  const showValidation = touched && !focused && email.length > 0;
+  const handleButtonClick = () => {
+    setAttemptedSubmit(true);
+    setTouched(true);
+    setFocused(false);
+  };
+
+  const showValidation = touched || attemptedSubmit;
 
   return (
-    <form onSubmit={handleSubmit} className={`w-full transition-all duration-300 ease-in-out ${isExiting ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
+    <form 
+      onSubmit={handleSubmit} 
+      noValidate 
+      className={`w-full transition-all duration-300 ease-in-out ${isExiting ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}
+    >
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1 relative group">
           <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/50 to-purple-500/50 opacity-0 
-                        group-hover:opacity-[0.08] blur-sm transition-opacity duration-300" />
+                        [@media(hover:hover)]:group-hover:opacity-[0.08] blur-sm transition-opacity duration-300" />
           
           <div className="relative flex items-center">
             <input
@@ -54,8 +68,6 @@ export default function EmailForm({
               }}
               onFocus={() => setFocused(true)}
               placeholder="Enter your email"
-              required
-              aria-invalid={showValidation && !hasValidEmail}
               className={`w-full h-11 px-4 bg-white/5 text-white rounded-xl
                         border transition-all duration-300
                         outline-none
@@ -63,17 +75,22 @@ export default function EmailForm({
                         backdrop-blur-sm
                         pr-10
                         ${showValidation
-                          ? hasValidEmail 
-                            ? 'border-green-500/30 focus:border-green-500/50 bg-green-500/5' 
-                            : 'border-red-500/30 focus:border-red-500/50 bg-red-500/5'
-                          : 'border-white/10 group-hover:border-white/20 focus:border-white/20 focus:bg-white/[0.07]'
+                          ? email.length === 0
+                            ? 'border-yellow-500/30 focus:border-yellow-500/50 bg-yellow-500/5'
+                            : hasValidEmail 
+                              ? 'border-green-500/30 focus:border-green-500/50 bg-green-500/5' 
+                              : 'border-red-500/30 focus:border-red-500/50 bg-red-500/5'
+                          : 'border-white/10 [@media(hover:hover)]:group-hover:border-white/20 focus:border-white/20 focus:bg-white/[0.07]'
                         }`}
             />
             
-            {/* Validation icon - only shows after blur */}
+            {/* Validation icon - shows on empty field, invalid email, or valid email */}
             {showValidation && (
-              <div className={`absolute right-3 transition-opacity duration-200 ${hasValidEmail ? 'text-green-500' : 'text-red-400'}`}>
-                {hasValidEmail ? (
+              <div className={`absolute right-3 transition-opacity duration-200 
+                ${email.length === 0 ? 'text-yellow-400' : hasValidEmail ? 'text-green-500' : 'text-red-400'}`}>
+                {email.length === 0 ? (
+                  <AlertCircle className="w-4 h-4" />
+                ) : hasValidEmail ? (
                   <Check className="w-4 h-4" />
                 ) : (
                   <AlertCircle className="w-4 h-4" />
@@ -86,10 +103,11 @@ export default function EmailForm({
         <div className="relative w-full sm:w-auto">
           <button
             type="submit"
-            disabled={isSubmitting || !hasValidEmail}
+            disabled={isSubmitting}
+            onClick={handleButtonClick}
             className={`w-full sm:w-auto h-11 px-6 bg-gray-850/95 text-white rounded-xl font-medium
                       transition-all duration-200 ease-out
-                      hover:bg-gray-900/100 hover:scale-[0.98]
+                      [@media(hover:hover)]:hover:bg-gray-900/100 [@media(hover:hover)]:hover:scale-[0.98]
                       active:scale-95
                       flex items-center justify-center gap-2
                       disabled:opacity-50 disabled:cursor-not-allowed
