@@ -11,7 +11,7 @@ const socialLinks = [
   },
   {
     platform: 'TikTok',
-    url: 'https://tiktok.com/@yourhandle',
+    url: 'https://tiktok.com/@flogi.co',
     colorClass: '[@media(hover:hover)]:hover:text-white active:text-white',
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current">
