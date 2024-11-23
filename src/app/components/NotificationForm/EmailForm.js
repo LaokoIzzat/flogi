@@ -19,7 +19,7 @@ export default function EmailForm({
     allow_utf8_local_part: false,
     require_tld: true,
     allow_ip_domain: false,
-    domain_specific_validation: true,
+    domain_specific_validation: false,
     blacklisted_chars: '()<>[]\\,;:',
     host_blacklist: [],
   });
