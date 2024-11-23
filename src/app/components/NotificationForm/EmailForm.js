@@ -112,7 +112,7 @@ export default function EmailForm({
                       flex items-center justify-center gap-2
                       disabled:opacity-50 disabled:cursor-not-allowed
                       disabled:hover:scale-100
-                      border border-white-700/50
+                      border border-white/30
                       shadow-lg shadow-gray-900/20
                       backdrop-blur-sm
                       overflow-hidden

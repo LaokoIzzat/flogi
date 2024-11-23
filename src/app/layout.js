@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       <head>
         <link
           rel="preload"
-          href="/images/flogi-logo.webm"
+          href="/images/flogi-logo.gif"
           as="image"
           type="image/webp"
           fetchPriority="high"
