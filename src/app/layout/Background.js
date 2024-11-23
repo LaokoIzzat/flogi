@@ -40,7 +40,7 @@ function Backdrop({ isPortrait, isClient }) {
           sizes="100vw"
           style={{
             objectFit: 'cover',
-            opacity: 0.1
+            opacity: 0.05
           }}
         />
       </div>
