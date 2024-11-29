@@ -14,8 +14,8 @@ const Home = () => {
 
           <Background />
 
-          {/*blue/purple gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-transparent" />
+          {/* dark room gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900/30 to-gray-800/30" />
 
           {/* Grid background */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
