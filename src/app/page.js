@@ -1,27 +1,56 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Background from './layout/Background.js';
 import Logo from './components/Logo.js';
 import NotificationForm from './components/NotificationForm';
 import SocialLinks from './components/SocialLinks.js';
+import gsap from 'gsap';
 
 const Home = () => {
+  useEffect(() => {
+    const animateContent = () => {
+      const tl = gsap.timeline({ delay: 0.25 });
+      
+      tl.from('.content-wrapper', {
+        opacity: 0,
+        y: 10,
+        duration: 0.3,
+        ease: "power3.out"
+      });
+
+      tl.from('.grid-background', {
+        opacity: 0,
+        scale: 1.05,
+        duration: 0.4,
+        ease: "power3.out"
+      }, "-=0.5");
+
+      tl.from('.gradient-overlay', {
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      }, "-=0.7");
+    };
+
+    animateContent();
+  }, []);
+
   return (
     <div className="scroll-container">
       <main className="min-h-screen flex flex-col">
         <div className="relative flex-1 flex flex-col items-center justify-center p-8 pb-16 sm:pb-8 bg-black">
-
+          
           <Background />
 
           {/* dark room gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900/30 to-gray-800/30" />
+          <div className="gradient-overlay absolute inset-0 bg-gradient-to-br from-black via-gray-900/30 to-gray-800/30" />
 
           {/* Grid background */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
+          <div className="grid-background absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
           
           {/* Main content container */}
-          <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
+          <div className="content-wrapper relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
             <Logo />
             
             <p className="text-lg text-gray-300 font-light tracking-wide mb-6">
@@ -38,7 +67,6 @@ const Home = () => {
             
             <NotificationForm />
             <SocialLinks />
-            
           </div>
         </div>
       </main>
