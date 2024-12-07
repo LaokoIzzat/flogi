@@ -10,32 +10,73 @@ import gsap from 'gsap';
 const Home = () => {
   useEffect(() => {
     // Set initial states
-    gsap.set(['.content-wrapper', '.grid-background', '.gradient-overlay'], {
+    gsap.set('.content-wrapper', {
+      opacity: 0
+    });
+    
+    gsap.set('.logo-container, .description, .title-container, .form-wrapper, .social-links', {
+      opacity: 0,
+      y: -50 // Start above final position
+    });
+
+    gsap.set(['.grid-background', '.gradient-overlay'], {
       opacity: 0
     });
     
     const animateContent = () => {
       const tl = gsap.timeline({ delay: 0.25 });
       
-      tl.to('.content-wrapper', {
-        opacity: 1,
-        y: 0,
-        duration: 0.3,
-        ease: "power3.out"
-      });
-
+      // Fade in the background elements
       tl.to('.grid-background', {
         opacity: 1,
         scale: 1,
+        duration: 0.6,
+        ease: "power2.out"
+      })
+      .to('.gradient-overlay', {
+        opacity: 1,
         duration: 0.4,
-        ease: "power3.out"
-      }, "-=0.5");
+        ease: "power2.out"
+      }, "-=0.3");
 
-      tl.to('.gradient-overlay', {
+      // Animate content wrapper
+      tl.to('.content-wrapper', {
         opacity: 1,
         duration: 0.3,
         ease: "power2.out"
-      }, "-=0.7");
+      }, "-=0.2");
+
+      // Drop in elements with bounce effect
+      tl.to('.logo-container', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.5)"
+      }, "-=0.1")
+      .to('.description', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.5)"
+      }, "-=0.6")
+      .to('.title-container', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.5)"
+      }, "-=0.6")
+      .to('.form-wrapper', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.5)"
+      }, "-=0.6")
+      .to('.social-links', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.5)"
+      }, "-=0.6");
     };
 
     animateContent();
@@ -56,13 +97,15 @@ const Home = () => {
           
           {/* Main content container */}
           <div className="content-wrapper relative z-10 opacity-0 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
-            <Logo />
+            <div className="logo-container">
+              <Logo />
+            </div>
             
-            <p className="text-lg text-gray-300 font-light tracking-wide mb-6">
+            <p className="description text-lg text-gray-300 font-light tracking-wide mb-6">
               Premium athletic wear for combat sports and fitness
             </p>
             
-            <div className="space-y-6 mb-8">
+            <div className="title-container space-y-6 mb-8">
               <h1 className="text-4xl sm:text-5xl font-light tracking-tight md:text-6xl text-white">
                 <span className="font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent animate-gradient-x">
                   Coming Soon
@@ -70,8 +113,13 @@ const Home = () => {
               </h1>
             </div>
             
-            <NotificationForm />
-            <SocialLinks />
+            <div className="form-wrapper w-full flex items-center justify-center">
+              <NotificationForm />
+            </div>
+            
+            <div className="social-links">
+              <SocialLinks />
+            </div>
           </div>
         </div>
       </main>
