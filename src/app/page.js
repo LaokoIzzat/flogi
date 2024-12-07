@@ -9,25 +9,30 @@ import gsap from 'gsap';
 
 const Home = () => {
   useEffect(() => {
+    // Set initial states
+    gsap.set(['.content-wrapper', '.grid-background', '.gradient-overlay'], {
+      opacity: 0
+    });
+    
     const animateContent = () => {
       const tl = gsap.timeline({ delay: 0.25 });
       
-      tl.from('.content-wrapper', {
-        opacity: 0,
-        y: 10,
+      tl.to('.content-wrapper', {
+        opacity: 1,
+        y: 0,
         duration: 0.3,
         ease: "power3.out"
       });
 
-      tl.from('.grid-background', {
-        opacity: 0,
-        scale: 1.05,
+      tl.to('.grid-background', {
+        opacity: 1,
+        scale: 1,
         duration: 0.4,
         ease: "power3.out"
       }, "-=0.5");
 
-      tl.from('.gradient-overlay', {
-        opacity: 0,
+      tl.to('.gradient-overlay', {
+        opacity: 1,
         duration: 0.3,
         ease: "power2.out"
       }, "-=0.7");
@@ -44,13 +49,13 @@ const Home = () => {
           <Background />
 
           {/* dark room gradient overlay */}
-          <div className="gradient-overlay absolute inset-0 bg-gradient-to-br from-black via-gray-900/30 to-gray-800/30" />
+          <div className="gradient-overlay absolute inset-0 opacity-0 bg-gradient-to-br from-black via-gray-900/30 to-gray-800/30" />
 
           {/* Grid background */}
-          <div className="grid-background absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
+          <div className="grid-background absolute inset-0 opacity-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
           
           {/* Main content container */}
-          <div className="content-wrapper relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
+          <div className="content-wrapper relative z-10 opacity-0 flex flex-col items-center justify-center w-full max-w-2xl mx-auto text-center">
             <Logo />
             
             <p className="text-lg text-gray-300 font-light tracking-wide mb-6">
