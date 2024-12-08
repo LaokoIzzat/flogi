@@ -14,9 +14,16 @@ const Home = () => {
       opacity: 0
     });
     
-    gsap.set('.logo-container, .description, .title-container, .form-wrapper, .social-links', {
+    // Set initial states for all animated elements at once
+    gsap.set('.logo-container, .description, .title-container, .social-links', {
       opacity: 0,
-      y: -50 // Start above final position
+      y: -50
+    });
+
+    // Handle form wrapper separately
+    gsap.set('.form-wrapper', {
+      visibility: 'hidden',
+      y: -50
     });
 
     gsap.set(['.grid-background', '.gradient-overlay'], {
@@ -66,7 +73,7 @@ const Home = () => {
         ease: "elastic.out(1, 0.5)"
       }, "-=0.6")
       .to('.form-wrapper', {
-        opacity: 1,
+        visibility: 'visible',
         y: 0,
         duration: 0.8,
         ease: "elastic.out(1, 0.5)"

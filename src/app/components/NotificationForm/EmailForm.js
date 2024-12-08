@@ -47,7 +47,8 @@ export default function EmailForm({
     <form 
       onSubmit={handleSubmit} 
       noValidate 
-      className={`w-full transition-all duration-300 ease-in-out ${isExiting ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}
+      className="w-full !opacity-100"
+      style={{ opacity: 1 }}
     >
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1 relative group">
