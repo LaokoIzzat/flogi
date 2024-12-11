@@ -1,8 +1,40 @@
 'use client';
 
 import { CheckCircle } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 
 export default function SuccessMessage({ show }) {
+  const checkRef = useRef(null);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    if (show) {
+      // Reset initial states
+      gsap.set([checkRef.current, textRef.current], { 
+        scale: 0,
+        opacity: 0 
+      });
+
+      // Animate check mark first
+      gsap.to(checkRef.current, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: "elastic.out(1, 0.5)",
+        delay: 0.2
+      });
+
+      // Then animate text
+      gsap.to(textRef.current, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+        delay: 0.6
+      });
+    }
+  }, [show]);
   return (
     <div className={`w-full transition-all duration-500 ease-in-out
                    ${show ? 'h-[140px]' : 'h-0'}`}>
@@ -24,9 +56,9 @@ export default function SuccessMessage({ show }) {
                         relative overflow-hidden">
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-sm" />
-              <CheckCircle className="w-8 h-8 text-white relative" />
+              <CheckCircle ref={checkRef} className="w-8 h-8 text-white relative" />
             </div>
-            <div className="flex flex-col items-center space-y-1.5 text-center relative">
+            <div ref={textRef} className="flex flex-col items-center space-y-1.5 text-center relative">
               <p className="text-sm text-white/75">
                 Thank you for joining our waitlist. We&apos;ll be in touch soon.
               </p>
