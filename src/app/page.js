@@ -14,16 +14,28 @@ const Home = () => {
       opacity: 0
     });
     
-    // Set initial states for all animated elements at once
-    gsap.set('.logo-container, .description, .title-container, .social-links', {
+    // Set initial states for all animated elements
+    gsap.set('.logo-container', {
       opacity: 0,
-      y: -50
+      scale: 1.2,
+      filter: 'blur(10px)'
     });
 
-    // Handle form wrapper separately
+    gsap.set('.description, .title-container', {
+      opacity: 0,
+      y: 30,
+      filter: 'blur(5px)'
+    });
+
     gsap.set('.form-wrapper', {
       visibility: 'hidden',
-      y: -50
+      opacity: 0,
+      y: 40
+    });
+
+    gsap.set('.social-links', {
+      opacity: 0,
+      y: 20
     });
 
     gsap.set(['.grid-background', '.gradient-overlay'], {
@@ -53,37 +65,41 @@ const Home = () => {
         ease: "power2.out"
       }, "-=0.2");
 
-      // Drop in elements with bounce effect
+      // Cinematic reveal animation sequence
       tl.to('.logo-container', {
         opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.5)"
-      }, "-=0.1")
+        scale: 1,
+        filter: 'blur(0px)',
+        duration: 1.5,
+        ease: "power4.out"
+      })
       .to('.description', {
         opacity: 1,
         y: 0,
+        filter: 'blur(0px)',
         duration: 0.8,
-        ease: "elastic.out(1, 0.5)"
-      }, "-=0.6")
+        ease: "power2.out"
+      }, "-=0.9")
       .to('.title-container', {
         opacity: 1,
         y: 0,
+        filter: 'blur(0px)',
         duration: 0.8,
-        ease: "elastic.out(1, 0.5)"
+        ease: "power2.out"
       }, "-=0.6")
       .to('.form-wrapper', {
         visibility: 'visible',
-        y: 0,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.5)"
-      }, "-=0.6")
-      .to('.social-links', {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        ease: "elastic.out(1, 0.5)"
-      }, "-=0.6");
+        ease: "power2.out"
+      }, "-=0.5")
+      .to('.social-links', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      }, "-=0.4");
     };
 
     animateContent();
