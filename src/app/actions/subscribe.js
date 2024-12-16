@@ -2,26 +2,41 @@
 
 import { neon } from '@neondatabase/serverless';
 
+const sql = neon(process.env.DATABASE_URL);
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function subscribe(formData) {
-  const sql = neon(process.env.DATABASE_URL);
-  const email = formData.get('email');
+  const email = formData.get('email')?.trim().toLowerCase();
 
   try {
-    // Check if email already exists
+    if (!email) {
+      return {
+        error: 'Email is required'
+      };
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      return {
+        error: 'Please provide a valid email address'
+      };
+    }
+
     const existingEmail = await sql`
-      SELECT comment FROM comments 
-      WHERE comment = ${email}
+      SELECT EXISTS(
+        SELECT 1 FROM email_subscriptions 
+        WHERE email = ${email}
+      );
     `;
 
-    if (existingEmail.length > 0) {
+    if (existingEmail[0].exists) {
       return {
         error: 'This email is already subscribed'
       };
     }
 
-    // Insert new subscriber
     await sql`
-      INSERT INTO comments (comment) 
+      INSERT INTO email_subscriptions (email) 
       VALUES (${email})
     `;
 
@@ -29,6 +44,7 @@ export async function subscribe(formData) {
       success: true,
       message: 'Successfully subscribed!'
     };
+
   } catch (error) {
     console.error('Subscription error:', error);
     return {
