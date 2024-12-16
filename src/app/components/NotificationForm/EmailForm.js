@@ -8,8 +8,7 @@ export default function EmailForm({
   email, 
   onEmailChange, 
   onSubmit, 
-  isSubmitting, 
-  isExiting 
+  isSubmitting 
 }) {
   const [touched, setTouched] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -45,8 +44,8 @@ export default function EmailForm({
 
   return (
     <form 
-      onSubmit={handleSubmit} 
-      noValidate 
+      onSubmit={handleSubmit}
+      noValidate
       className="w-full !opacity-100"
       style={{ opacity: 1 }}
     >
@@ -57,12 +56,10 @@ export default function EmailForm({
           
           <div className="relative flex items-center">
             <input
+              name="email"
               type="email"
               value={email}
-              onChange={(e) => {
-                onEmailChange(e);
-                setTouched(true);
-              }}
+              onChange={onEmailChange}
               onBlur={() => {
                 setTouched(true);
                 setFocused(false);
@@ -85,7 +82,6 @@ export default function EmailForm({
                         }`}
             />
             
-            {/* Validation icon - shows on empty field, invalid email, or valid email */}
             {showValidation && (
               <div className={`absolute right-3 transition-opacity duration-200 
                 ${email.length === 0 ? 'text-yellow-400' : hasValidEmail ? 'text-green-500' : 'text-red-400'}`}>
