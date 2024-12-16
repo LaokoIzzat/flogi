@@ -25,7 +25,6 @@ export default function NotificationForm() {
       const result = await subscribe(formData);
 
       if (result.error) {
-        // Check if the error is due to existing email
         if (result.error.includes('already subscribed')) {
           setErrorType('already-subscribed');
         } else {
@@ -38,7 +37,6 @@ export default function NotificationForm() {
 
       setTimeout(() => {
         setStatus('success');
-        setEmail('');
         setIsSubmitting(false);
         setIsExiting(false);
         setShowSuccess(true);
@@ -48,6 +46,7 @@ export default function NotificationForm() {
         setShowSuccess(false);
         setTimeout(() => {
           setStatus('');
+          setEmail(''); // Clear email when form reappears after success
         }, 300);
       }, 4000);
 
@@ -63,6 +62,7 @@ export default function NotificationForm() {
         setTimeout(() => {
           setStatus('');
           setErrorType('');
+          setEmail(''); // Clear email when form reappears after error
         }, 300);
       }, 4000);
     }
