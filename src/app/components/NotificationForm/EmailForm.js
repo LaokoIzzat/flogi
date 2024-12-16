@@ -40,7 +40,8 @@ export default function EmailForm({
     setFocused(false);
   };
 
-  const showValidation = touched || attemptedSubmit;
+  // Modified to show validation as soon as there's any input
+  const showValidation = email.length > 0 || touched || attemptedSubmit;
 
   return (
     <form 
@@ -59,7 +60,10 @@ export default function EmailForm({
               name="email"
               type="email"
               value={email}
-              onChange={onEmailChange}
+              onChange={(e) => {
+                onEmailChange(e);
+                setTouched(true); // Also set touched on change
+              }}
               onBlur={() => {
                 setTouched(true);
                 setFocused(false);
